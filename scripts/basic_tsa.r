@@ -102,3 +102,124 @@ plot(
 )
 
 dev.off()
+
+
+# 6. Stationarity Tests -------------------------------------------------------
+
+library(tseries)
+
+print(adf.test(msft_ts))
+print(kpss.test(msft_ts))
+
+
+# 7. Autocorrelation Analysis --------------------------------------------------
+
+jpeg(
+  filename = "outputs/msft_acf.jpg",
+  width    = 1200,
+  height   = 900,
+  res      = 150
+)
+
+acf(msft_ts,lag.max = 24, main = "ACF")
+
+dev.off()
+
+
+# 8. Partial Autocorrelation Analysis ------------------------------------------
+
+jpeg(
+  filename = "outputs/msft_pacf.jpg",
+  width    = 1200,
+  height   = 900,
+  res      = 150
+)
+
+pacf(msft_ts, lag.max = 24, main = "PACF")
+
+dev.off()
+
+
+# 9. Differencing the Time Series ----------------------------------------------
+
+diff_data <- diff(msft_ts) 
+
+jpeg(
+  filename = "outputs/msft_diff.jpg",
+  width    = 1200,
+  height   = 900,
+  res      = 150
+)
+
+plot(
+    diff_data
+    , type = "l"
+    , col = "blue"
+    , lwd = 1.5
+    , main = "(diff) of Microsoft Close"
+    , ylab = "diff(Close)", xlab = "Date"
+)
+
+dev.off()
+
+
+# 10. Stationarity Tests on Differenced Data -----------------------------------
+
+print(adf.test(diff_data))
+print(kpss.test(diff_data))
+
+
+# 11. ACF of Differenced Data --------------------------------------------------
+
+jpeg(
+  filename = "outputs/msft_acf_diff.jpg",
+  width    = 1200,
+  height   = 900,
+  res      = 150
+)
+
+acf(diff_data, lag.max = 24, main = "ACF after first diff")
+
+dev.off()
+
+
+# 12. PACF of Differenced Data -------------------------------------------------
+
+jpeg(
+  filename = "outputs/msft_pacf_diff.jpg"
+  , width    = 1200
+  , height   = 900   
+  , res      = 150
+)
+
+pacf(diff_data, lag.max = 24, main = "PACF after first diff")
+
+dev.off()
+
+
+# 13. Log Transformation -------------------------------------------------------
+
+jpeg(
+  filename = "outputs/msft_log.jpg"
+  , width    = 1200
+  , height   = 900   
+  , res      = 150
+)
+
+log_data <- log(msft_ts)
+plot(log_data, main = "Log-transformed Microsoft Close")
+
+dev.off()
+
+# 14. ACF of Log-transformed Data --------------------------------------------------
+
+jpeg(
+  filename = "outputs/msft_log_acf.jpg"
+  , width    = 1200
+  , height   = 900   
+  , res      = 150
+)
+
+acf(log_data, lag.max = 24, main = "ACF")
+
+dev.off()
