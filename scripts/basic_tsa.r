@@ -1,35 +1,16 @@
 # =============================================================================
 # Project: Microsoft Stock Analysis
 # Author:  Maksym Yakushev
-# Date:    2026-05-22
+# Date:    2026-05-24
 # Description: Basic time series analysis of Microsoft stock data
 # =============================================================================
 
 
 # 1. Data Loading -------------------------------------------------------------
-stock <- read.csv(
-    "data/raw/microsoft_stock.csv"
-    , header = TRUE
-    , sep = ","
-    , stringsAsFactors = FALSE
-)
 
+stock <- readRDS("data/processed/msft.rds")
 
-# 2. Initial Data Processing --------------------------------------------------
-
-# Convert the 'Date' column to Date format
-stock$Date <- as.Date(
-    stock$Date
-    , tryFormats = c("%Y-%m-%d", "%m/%d/%Y", "%d.%m.%Y"))
-
-msft_ts <- ts(
-    stock$Close
-    , frequency = 252
-    , start = c(2015, 1)
-)
-
-
-# 3. Time Series Decomposition ------------------------------------------------
+# 2. Time Series Decomposition ------------------------------------------------
 
 decomp <- stl(
     msft_ts
@@ -37,10 +18,10 @@ decomp <- stl(
 )
 
 jpeg(
-  filename = "outputs/msft_trend.jpg",
-  width    = 1200,
-  height   = 650,
-  res      = 150
+  filename = "outputs/msft_trend.jpg"
+  , width    = 1200
+  , height   = 650
+  , res      = 150
 )
 
 plot(
@@ -58,13 +39,13 @@ axis(1, at = year_positions, labels = year_positions)
 dev.off()
 
 
-# 4. Plotting the Decomposition ------------------------------------------------
+# 3. Plotting the Decomposition ------------------------------------------------
 
 jpeg(
-  filename = "outputs/msft_stl.jpg",
-  width    = 1200,
-  height   = 900,
-  res      = 150
+  filename = "outputs/msft_stl.jpg"
+  , width = 1200
+  , height = 900
+  , res = 150
 )
 
 plot(decomp, main = "STL Microsoft Stock Price")
@@ -72,7 +53,7 @@ plot(decomp, main = "STL Microsoft Stock Price")
 dev.off()
 
 
-# 5. Rolling Standard Deviation ------------------------------------------------
+# 4. Rolling Standard Deviation ------------------------------------------------
 
 library(zoo)
 
@@ -84,10 +65,10 @@ rolling_sd <- rollapply(
 )
 
 jpeg(
-  filename = "outputs/msft_rolling_sd.jpg",
-  width    = 1200,
-  height   = 900,
-  res      = 150
+  filename = "outputs/msft_rolling_sd.jpg"
+  , width    = 1200
+  , height   = 900
+  , res      = 150
 )
 
 plot(
@@ -104,7 +85,7 @@ plot(
 dev.off()
 
 
-# 6. Stationarity Tests -------------------------------------------------------
+# 5. Stationarity Tests -------------------------------------------------------
 
 library(tseries)
 
@@ -112,27 +93,27 @@ print(adf.test(msft_ts))
 print(kpss.test(msft_ts))
 
 
-# 7. Autocorrelation Analysis --------------------------------------------------
+# 6. Autocorrelation Analysis --------------------------------------------------
 
 jpeg(
-  filename = "outputs/msft_acf.jpg",
-  width    = 1200,
-  height   = 900,
-  res      = 150
+  filename = "outputs/msft_acf.jpg"
+  , width = 1200
+  , height = 900
+  , res = 150
 )
 
-acf(msft_ts,lag.max = 24, main = "ACF")
+acf(msft_ts, lag.max = 24, main = "ACF")
 
 dev.off()
 
 
-# 8. Partial Autocorrelation Analysis ------------------------------------------
+# 7. Partial Autocorrelation Analysis ------------------------------------------
 
 jpeg(
-  filename = "outputs/msft_pacf.jpg",
-  width    = 1200,
-  height   = 900,
-  res      = 150
+  filename = "outputs/msft_pacf.jpg"
+  , width = 1200
+  , height = 900
+  , res = 150
 )
 
 pacf(msft_ts, lag.max = 24, main = "PACF")

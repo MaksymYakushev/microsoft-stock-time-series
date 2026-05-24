@@ -1,39 +1,26 @@
 # =============================================================================
 # Project: Microsoft Stock Analysis
 # Author:Maksym Yakushev
-# Date: 2026-05-22
+# Date: 2026-05-24
 # Description: Data loading and initial processing of Microsoft stock data
 # =============================================================================
 
 
 # 1. Data Loading -------------------------------------------------------------
-stock <- read.csv(
-    "data/raw/microsoft_stock.csv"
-    , header = TRUE
-    , sep = ","
-    , stringsAsFactors = FALSE
-)
+stock <- readRDS("data/processed/msft.rds")
 
 
-# 2. Initial Data Processing --------------------------------------------------
-
-# Convert the 'Date' column to Date format
-stock$Date <- as.Date(
-    stock$Date
-    , tryFormats = c("%Y-%m-%d", "%m/%d/%Y", "%d.%m.%Y"))
-
-
-# 3. Data Inspection -----------------------------------------------------------
+# 2. Data Inspection -----------------------------------------------------------
 
 print(head(stock))
 
 
-# 4. Data Summary --------------------------------------------------------------
+# 3. Data Summary --------------------------------------------------------------
 
 str(stock)
 
 
-# 5. Time Series Plot ----------------------------------------------------------
+# 4. Time Series Plot ----------------------------------------------------------
 
 msft_ts <- ts(
     stock$Close
@@ -42,10 +29,10 @@ msft_ts <- ts(
 )
 
 jpeg(
-  filename = "outputs/msft_time_series.jpg",
-  width    = 1200,
-  height   = 650,
-  res      = 150
+  filename = "outputs/msft_time_series.jpg"
+  , width    = 1200
+  , height   = 650
+  , res      = 150
 )
 
 plot(
