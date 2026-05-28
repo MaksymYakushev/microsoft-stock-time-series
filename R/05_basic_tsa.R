@@ -1,14 +1,15 @@
 # =============================================================================
 # Project: Microsoft Stock Analysis
 # Author:  Maksym Yakushev
-# Date:    2026-05-24
+# Date:    2026-05-28
 # Description: Basic time series analysis of Microsoft stock data
 # =============================================================================
 
 
 # 1. Data Loading -------------------------------------------------------------
 
-stock <- readRDS("data/processed/msft.rds")
+msft_ts <- readRDS("data/processed/msft_ts.rds")
+
 
 # 2. Time Series Decomposition ------------------------------------------------
 
@@ -117,90 +118,5 @@ jpeg(
 )
 
 pacf(msft_ts, lag.max = 24, main = "PACF")
-
-dev.off()
-
-
-# 9. Differencing the Time Series ----------------------------------------------
-
-diff_data <- diff(msft_ts) 
-
-jpeg(
-  filename = "outputs/msft_diff.jpg",
-  width    = 1200,
-  height   = 900,
-  res      = 150
-)
-
-plot(
-    diff_data
-    , type = "l"
-    , col = "blue"
-    , lwd = 1.5
-    , main = "(diff) of Microsoft Close"
-    , ylab = "diff(Close)", xlab = "Date"
-)
-
-dev.off()
-
-
-# 10. Stationarity Tests on Differenced Data -----------------------------------
-
-print(adf.test(diff_data))
-print(kpss.test(diff_data))
-
-
-# 11. ACF of Differenced Data --------------------------------------------------
-
-jpeg(
-  filename = "outputs/msft_acf_diff.jpg",
-  width    = 1200,
-  height   = 900,
-  res      = 150
-)
-
-acf(diff_data, lag.max = 24, main = "ACF after first diff")
-
-dev.off()
-
-
-# 12. PACF of Differenced Data -------------------------------------------------
-
-jpeg(
-  filename = "outputs/msft_pacf_diff.jpg"
-  , width    = 1200
-  , height   = 900   
-  , res      = 150
-)
-
-pacf(diff_data, lag.max = 24, main = "PACF after first diff")
-
-dev.off()
-
-
-# 13. Log Transformation -------------------------------------------------------
-
-jpeg(
-  filename = "outputs/msft_log.jpg"
-  , width    = 1200
-  , height   = 900   
-  , res      = 150
-)
-
-log_data <- log(msft_ts)
-plot(log_data, main = "Log-transformed Microsoft Close")
-
-dev.off()
-
-# 14. ACF of Log-transformed Data --------------------------------------------------
-
-jpeg(
-  filename = "outputs/msft_log_acf.jpg"
-  , width    = 1200
-  , height   = 900   
-  , res      = 150
-)
-
-acf(log_data, lag.max = 24, main = "ACF")
 
 dev.off()

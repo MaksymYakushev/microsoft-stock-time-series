@@ -1,8 +1,9 @@
 # =============================================================================
 # Project: Microsoft Stock Analysis
 # Author:Maksym Yakushev
-# Date: 2026-05-24
-# Description: Data loading and preparing
+# Date: 2026-05-28
+# Description: Load raw Microsoft stock data and save it in RDS format for 
+#further processing
 # =============================================================================
 
 
@@ -13,9 +14,4 @@ stock <- read.csv(
   , stringsAsFactors = FALSE
 )
 
-stock$Date <- as.Date(
-  stock$Date
-  , tryFormats = c("%Y-%m-%d", "%m/%d/%Y", "%d.%m.%Y")
-)
-
-saveRDS(stock, "data/processed/msft.rds")
+saveRDS(stock, "data/interim/msft_raw.rds")

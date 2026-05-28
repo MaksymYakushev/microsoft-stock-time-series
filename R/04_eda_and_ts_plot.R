@@ -1,32 +1,23 @@
 # =============================================================================
 # Project: Microsoft Stock Analysis
 # Author:Maksym Yakushev
-# Date: 2026-05-24
-# Description: Data loading and initial processing of Microsoft stock data
+# Date: 2026-05-28
+# Description: Exploratory data analysis and time series plotting for Microsoft 
+#stock data
 # =============================================================================
 
 
 # 1. Data Loading -------------------------------------------------------------
-stock <- readRDS("data/processed/msft.rds")
+
+msft_ts <- readRDS("data/processed/msft_ts.rds")
 
 
-# 2. Data Inspection -----------------------------------------------------------
+# 2. Data Summary --------------------------------------------------------------
 
-print(head(stock))
-
-
-# 3. Data Summary --------------------------------------------------------------
-
-str(stock)
+summary(msft_ts)
 
 
-# 4. Time Series Plot ----------------------------------------------------------
-
-msft_ts <- ts(
-    stock$Close
-    , frequency = 252
-    , start = c(2015, 1)
-)
+# 3. Time Series Plot ----------------------------------------------------------
 
 jpeg(
   filename = "outputs/msft_time_series.jpg"
@@ -36,7 +27,8 @@ jpeg(
 )
 
 plot(
-    msft_ts, type = "l" # nolint
+    msft_ts
+    , type = "l" 
     , main = "Microsoft Stock Price Over Time"
     , ylab = "Closing Price"
     , xlab = "Date"
@@ -48,4 +40,3 @@ year_positions <- seq(2015, 2021, by = 1)
 axis(1, at = year_positions, labels = year_positions)
 
 dev.off()
-

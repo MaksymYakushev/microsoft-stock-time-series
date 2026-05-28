@@ -1,14 +1,15 @@
 # =============================================================================
 # Project: Microsoft Stock Analysis
 # Author:  Maksym Yakushev
-# Date:    2026-05-24
-# Description: Differencing the Microsoft stock time series and analyzing the results
+# Date:    2026-05-28
+# Description: Differencing the Microsoft stock time series to achieve 
+#stationarity and analyzing the differenced series
 # =============================================================================
 
 
 # 1. Data Loading -------------------------------------------------------------
 
-stock <- readRDS("data/processed/msft.rds")
+msft_ts <- readRDS("data/processed/msft_ts.rds")
 
 
 # 2. Differencing the Time Series ----------------------------------------------
@@ -66,4 +67,3 @@ jpeg(
 pacf(diff_data, lag.max = 24, main = "PACF after first diff")
 
 dev.off()
-
