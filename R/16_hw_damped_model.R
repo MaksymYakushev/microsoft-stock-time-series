@@ -64,3 +64,22 @@ dev.off()
 # 6. Accuracy Metrics ----------------------------------------------------------
 
 print(accuracy(fc_hw_add_damp, test))
+
+
+# 7. Plotting Original and Fitted Values ---------------------------------------
+
+p <- autoplot(msft_ts_monthly, series = "Original Series") +
+  autolayer(fitted(hw_add_damped_model), series = "Fitted Value") +
+  ggtitle("Original and Fitted Time Series - Holt-Winters Additive Damped") +
+  ylab("Closing Price") + xlab("Time")
+
+jpeg(
+  filename = "outputs/msft_hw_additive_damped_fitted.jpg",
+  width = 1200,
+  height = 900,
+  res = 150
+)
+
+print(p)
+
+dev.off()

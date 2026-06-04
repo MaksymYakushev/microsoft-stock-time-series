@@ -239,3 +239,206 @@ print(accuracy(fc_ets_ma_da, test))
 print(accuracy(fc_ets_mam, test))
 print(accuracy(fc_ets_ma_dm, test))
 print(accuracy(fc_ets_auto, test))
+
+
+# 7. Plotting Original and Fitted Values ---------------------------------------
+
+# ETS AAA Model
+p <- autoplot(msft_ts_monthly, series = "Original Series") +
+  autolayer(fitted(ets_aaa_model), series = "Fitted Value") +
+  ggtitle("Original and Fitted Time Series - ETS AAA") +
+  ylab("Closing Price") + xlab("Time")
+
+jpeg(
+  filename = "outputs/msft_ets_aaa_fitted.jpg",
+  width = 1200,
+  height = 900,
+  res = 150
+)
+
+print(p)
+
+dev.off()
+
+# ETS AAA Damped Model
+p <- autoplot(msft_ts_monthly, series = "Original Series") +
+  autolayer(fitted(ets_aa_da_model), series = "Fitted Value") +
+  ggtitle("Original and Fitted Time Series - ETS AAA Damped") +
+  ylab("Closing Price") + xlab("Time")
+
+jpeg(
+  filename = "outputs/msft_ets_aa_da_fitted.jpg",
+  width = 1200,
+  height = 900,
+  res = 150
+)
+
+print(p)
+
+dev.off()
+
+# ETS MAM Model
+p <- autoplot(msft_ts_monthly, series = "Original Series") +
+  autolayer(fitted(ets_mam_model), series = "Fitted Value") +
+  ggtitle("Original and Fitted Time Series - ETS MAM") +
+  ylab("Closing Price") + xlab("Time")
+
+jpeg(
+  filename = "outputs/msft_ets_mam_fitted.jpg",
+  width = 1200,
+  height = 900,
+  res = 150
+)
+
+print(p)
+
+dev.off()
+
+# ETS MA DM Model
+p <- autoplot(msft_ts_monthly, series = "Original Series") +
+  autolayer(fitted(ets_ma_dm_model), series = "Fitted Value") +
+  ggtitle("Original and Fitted Time Series - ETS MA DM") +
+  ylab("Closing Price") + xlab("Time")
+
+jpeg(
+  filename = "outputs/msft_ets_ma_dm_fitted.jpg",
+  width = 1200,
+  height = 900,
+  res = 150
+)
+
+print(p)
+
+dev.off()
+
+# ETS Auto Model
+p <- autoplot(msft_ts_monthly, series = "Original Series") +
+  autolayer(fitted(ets_auto), series = "Fitted Value") +
+  ggtitle("Original and Fitted Time Series - ETS Auto") +
+  ylab("Closing Price") + xlab("Time")
+
+jpeg(
+  filename = "outputs/msft_ets_auto_fitted.jpg",
+  width = 1200,
+  height = 900,
+  res = 150
+)
+
+print(p)
+
+dev.off()
+
+
+# 8. Plotting the Components of the Models -------------------------------------
+
+# ETS AAA Model
+p <- autoplot(ets_aaa_model) +
+  ggtitle("ETS AAA Components") +
+  ylab("Value") + xlab("Time")
+
+jpeg(
+  filename = "outputs/msft_ets_aaa_components.jpg",
+  width = 1200,
+  height = 900,
+  res = 150
+)
+
+print(p)
+
+dev.off()
+
+# ETS AAA Damped Model
+p <- autoplot(ets_aa_da_model) +
+  ggtitle("ETS AAA Damped Components") +
+  ylab("Value") + xlab("Time")
+
+jpeg(
+  filename = "outputs/msft_ets_aa_da_components.jpg",
+  width = 1200,
+  height = 900,
+  res = 150
+)
+
+print(p)
+
+dev.off()
+
+# ETS MAA Model
+p <- autoplot(ets_maa_model) +
+  ggtitle("ETS MAA Components") +
+  ylab("Value") + xlab("Time")
+
+jpeg(
+  filename = "outputs/msft_ets_maa_components.jpg",
+  width = 1200,
+  height = 900,
+  res = 150
+)
+
+print(p)
+
+dev.off()
+
+# ETS MAA Damped Model
+p <- autoplot(ets_aa_da_model) +
+  ggtitle("ETS AAA Damped Components") +
+  ylab("Value") + xlab("Time")
+
+jpeg(
+  filename = "outputs/msft_ets_aa_da_components.jpg",
+  width = 1200,
+  height = 900,
+  res = 150
+)
+
+print(p)
+
+dev.off()
+
+# ETS MAM Model
+p <- autoplot(ets_mam_model) +
+  ggtitle("ETS MAM Components") +
+  ylab("Value") + xlab("Time")
+
+jpeg(
+  filename = "outputs/msft_ets_mam_components.jpg",
+  width = 1200,
+  height = 900,
+  res = 150
+)
+
+print(p)
+
+dev.off()
+
+# ETS MA DM Model
+p <- autoplot(ets_ma_dm_model) +
+  ggtitle("ETS MA DM Components") +
+  ylab("Value") + xlab("Time")
+
+jpeg(
+  filename = "outputs/msft_ets_ma_dm_components.jpg",
+  width = 1200,
+  height = 900,
+  res = 150
+)
+
+print(p)
+
+dev.off()
+
+# ETS Auto Model
+p <- autoplot(ets_auto) +
+  ggtitle("ETS Auto Components") +
+  ylab("Value") + xlab("Time")
+
+jpeg(
+  filename = "outputs/msft_ets_auto_components.jpg",
+  width = 1200,
+  height = 900,
+  res = 150
+)
+
+print(p)
+
+dev.off()

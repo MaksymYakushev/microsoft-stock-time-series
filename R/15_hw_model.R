@@ -64,5 +64,22 @@ dev.off()
 
 print(accuracy(fc_hw_add, test))
 
-# 7.
+
+# 7. Plotting Original and Fitted Values ---------------------------------------
+
+p <- autoplot(msft_ts_monthly, series = "Original Series") +
+  autolayer(fitted(hw_additive_model), series = "Fitted Value") +
+  ggtitle("Original and Fitted Time Series - Holt-Winters Additive") +
+  ylab("Closing Price") + xlab("Time")
+
+jpeg(
+  filename = "outputs/msft_hw_additive_fitted.jpg",
+  width = 1200,
+  height = 900,
+  res = 150
+)
+
+print(p)
+
+dev.off()
 
