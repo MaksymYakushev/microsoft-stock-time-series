@@ -97,7 +97,3 @@ The notebook is connected directly to the scripts in `R/`. Re-running all notebo
 - Language: R
 - Notebook: Jupyter Notebook with R kernel
 - Main libraries: `forecast`, `tseries`, `zoo`, `dplyr`, `ggplot2`
-
-## Conclusion
-
-This project shows a complete classical forecasting workflow for financial time series data. The final portfolio-ready pipeline is modular, reproducible, and documented through a report notebook. Among all tested models, **ETS MAM** achieved the best forecast accuracy on the held-out test period.
